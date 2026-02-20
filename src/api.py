@@ -1,10 +1,12 @@
+import os
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
 
-# Cargar modelo y vectorizador
-model = joblib.load("../models/model_phishing.pkl")
-vectorizer = joblib.load("../models/vectorizer.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = joblib.load(os.path.join(BASE_DIR, "../models/model_phishing.pkl"))
+vectorizer = joblib.load(os.path.join(BASE_DIR, "../models/vectorizer.pkl"))
 
 app = FastAPI()
 
