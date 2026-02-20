@@ -3,12 +3,22 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
 
+from fastapi.middleware.cors import CORSMiddleware
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 model = joblib.load(os.path.join(BASE_DIR, "../models/model_phishing.pkl"))
 vectorizer = joblib.load(os.path.join(BASE_DIR, "../models/vectorizer.pkl"))
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # luego puedes restringir
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class EmailRequest(BaseModel):
     message: str

@@ -7,7 +7,7 @@ function getEmailText() {
 }
 
 async function analyzeEmail(text) {
-    const response = await fetch("http://127.0.0.1:8000/predict", {
+    const response = await fetch("https://phishing-detector-ai-qjz7.onrender.com/predict", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

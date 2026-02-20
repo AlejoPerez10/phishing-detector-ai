@@ -5,8 +5,8 @@
     "description": "Detects phishing emails using AI.",
     "permissions": ["activeTab", "scripting"],
     "host_permissions": [
-        "http://127.0.0.1:8000/*",
-        "https://mail.google.com/*"
+        "https://mail.google.com/*",
+        "https://phishing-detector-ai-qjz7.onrender.com/*"
     ],
     "content_scripts": [
         {
