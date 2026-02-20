@@ -1,8 +1,13 @@
-let lastEmailText = null;
+let lastEmailId = null;
 
 function getEmailText() {
     const emailBody = document.querySelector("div.a3s");
     return emailBody ? emailBody.innerText : null;
+}
+
+function getCurrentEmailId() {
+    const match = window.location.href.match(/#.*\/([^/]+)$/);
+    return match ? match[1] : null;
 }
 
 async function analyzeEmail(text) {
@@ -16,15 +21,16 @@ async function analyzeEmail(text) {
 
     if (data.prediction === 1) {
         const percentage = (data.probability * 100).toFixed(2);
-        alert(`⚠️ Warning: Possible phishing.\nRisk: ${percentage}%`);
+        alert(`⚠️ Precaución: Posible Phishing.\n\tRiesgo: ${percentage}%`);
     }
 }
 
 const observer = new MutationObserver(() => {
+    const emailId = getCurrentEmailId();
     const text = getEmailText();
 
-    if (text && text !== lastEmailText) {
-        lastEmailText = text;
+    if (emailId && text && emailId !== lastEmailId) {
+        lastEmailId = emailId;
         analyzeEmail(text);
     }
 });
